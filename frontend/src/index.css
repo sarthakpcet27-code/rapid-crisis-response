@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0A0A0F;
+  color: #E5E7EB;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #12121A; }
+::-webkit-scrollbar-thumb { background: #2A2A3A; border-radius: 2px; }
+
+/* ── Glass Cards ── */
+.glass-card {
+  background: rgba(26, 26, 38, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+}
+
+.glass-card-hover {
+  background: rgba(26, 26, 38, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.glass-card-hover:hover {
+  border-color: rgba(226, 75, 74, 0.45);
+  background: rgba(226, 75, 74, 0.06);
+  transform: translateY(-1px);
+}
+
+/* ── Inputs ── */
+.glass-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  color: #E5E7EB;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  transition: border-color 0.2s;
+  resize: none;
+}
+.glass-input:focus { border-color: rgba(226, 75, 74, 0.55); }
+.glass-input::placeholder { color: #4B5563; }
+
+/* ── Severity Badges ── */
+.badge-red {
+  background: rgba(226, 75, 74, 0.18);
+  color: #F87171;
+  border: 1px solid rgba(226, 75, 74, 0.35);
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.badge-yellow {
+  background: rgba(245, 158, 11, 0.18);
+  color: #FCD34D;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.badge-green {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.badge-pending {
+  background: rgba(107, 114, 128, 0.18);
+  color: #9CA3AF;
+  border: 1px solid rgba(107, 114, 128, 0.35);
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ── SOS Pulse Animation ── */
+@keyframes ring-pulse {
+  0%   { transform: scale(0.75); opacity: 0.9; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+.sos-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #E24B4A;
+  animation: ring-pulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+.sos-ring-1 { width: 170px; height: 170px; animation-delay: 0s; }
+.sos-ring-2 { width: 210px; height: 210px; animation-delay: 0.7s; }
+.sos-ring-3 { width: 250px; height: 250px; animation-delay: 1.4s; }
+
+/* ── Countdown bounce ── */
+@keyframes bounce-scale {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.12); }
+}
+.countdown-circle {
+  animation: bounce-scale 0.9s ease-in-out infinite;
+}
+
+/* ── Spinner ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(226, 75, 74, 0.2);
+  border-top-color: #E24B4A;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+/* ── Navbar ── */
+.navbar {
+  background: rgba(10, 10, 15, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+.navbar-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: #E24B4A;
+  letter-spacing: 2px;
+}
+.navbar-links { display: flex; gap: 8px; }
+.nav-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #9CA3AF;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.nav-btn:hover { border-color: #E24B4A; color: #E24B4A; }
+.nav-btn.active { background: rgba(226, 75, 74, 0.15); border-color: #E24B4A; color: #F87171; }
+
+/* ── Crisis Type Pills ── */
+.crisis-pill {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: #9CA3AF;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+.crisis-pill:hover { border-color: rgba(226,75,74,0.4); color: #E5E7EB; }
+.crisis-pill.active {
+  background: rgba(226, 75, 74, 0.2);
+  border-color: #E24B4A;
+  color: #F87171;
+  font-weight: 600;
+}
+
+/* ── Primary Button ── */
+.btn-primary {
+  background: #E24B4A;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  width: 100%;
+}
+.btn-primary:hover { background: #c73f3e; transform: translateY(-1px); }
+.btn-primary:active { transform: scale(0.97); }
+
+/* ── SOS Circle Button ── */
+.sos-circle-btn {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FF6B6B, #E24B4A);
+  border: 4px solid rgba(255,107,107,0.5);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.12s, box-shadow 0.2s;
+  box-shadow: 0 0 40px rgba(226, 75, 74, 0.35);
+}
+.sos-circle-btn:hover { box-shadow: 0 0 60px rgba(226,75,74,0.5); transform: scale(1.04); }
+.sos-circle-btn:active { transform: scale(0.94); }
+
+/* ── GPS Badge ── */
+@keyframes gps-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.gps-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #34D399;
+  animation: gps-blink 1.5s ease-in-out infinite;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* ── Stat Cards ── */
+.stat-card {
+  background: rgba(26,26,38,0.85);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 18px 20px;
+  flex: 1;
+  min-width: 120px;
+}
+.stat-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 11px;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* ── Chat Bubbles ── */
+.chat-bubble-staff {
+  background: rgba(226,75,74,0.2);
+  border: 1px solid rgba(226,75,74,0.3);
+  color: #F87171;
+  padding: 8px 13px;
+  border-radius: 12px 12px 4px 12px;
+  font-size: 13px;
+  max-width: 75%;
+  display: inline-block;
+}
+.chat-bubble-guest {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #E5E7EB;
+  padding: 8px 13px;
+  border-radius: 12px 12px 12px 4px;
+  font-size: 13px;
+  max-width: 75%;
+  display: inline-block;
+}
+
+/* ── SOP Steps ── */
+.sop-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.sop-number {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: rgba(226,75,74,0.2);
+  border: 1px solid rgba(226,75,74,0.4);
+  color: #F87171;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Timeline ── */
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.timeline-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Fade in ── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fade-in 0.35s ease forwards; }
+
+/* ── Voice button ── */
+@keyframes voice-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(226,75,74,0.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(226,75,74,0); }
+}
+.voice-btn-active { animation: voice-pulse 1s ease-in-out infinite; }

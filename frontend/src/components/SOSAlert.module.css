@@ -1,0 +1,225 @@
+/* ================================================================
+   SOSAlert.module.css — Emergency alert overlay styles
+   ================================================================ */
+
+/* ── Animations ─────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-60px) scale(0.96); opacity: 0; }
+  to   { transform: translateY(0)     scale(1);    opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%       { transform: scale(1.35); opacity: 0.6; }
+}
+
+@keyframes timerShrink {
+  from { width: 100%; }
+  to   { width: 0%;   }
+}
+
+/* ── Overlay ────────────────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.3s ease;
+}
+
+/* ── Alert Box ──────────────────────────────────────────────────── */
+.alertBox {
+  background: linear-gradient(135deg, #1a0a0a 0%, #2d0d0d 100%);
+  border: 2px solid #FF6B6B;
+  border-radius: 16px;
+  width: min(560px, 90vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 0 40px rgba(255, 107, 107, 0.4),
+              0 0 80px rgba(255, 107, 107, 0.15);
+  animation: slideDown 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Header ─────────────────────────────────────────────────────── */
+.alertHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid rgba(255, 107, 107, 0.25);
+}
+
+.alertTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #FF6B6B;
+  margin: 0;
+  animation: blink 1s ease-in-out infinite;
+  letter-spacing: 0.04em;
+}
+
+.closeBtn {
+  background: rgba(255, 107, 107, 0.15);
+  border: 1px solid rgba(255, 107, 107, 0.4);
+  color: #FF6B6B;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 107, 107, 0.3);
+}
+
+/* ── Pulse Indicator ────────────────────────────────────────────── */
+.pulseIndicator {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.pulseDot {
+  width: 10px;
+  height: 10px;
+  background: #FF6B6B;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.pulseDot:nth-child(2) { animation-delay: 0.2s; }
+.pulseDot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ── Timer Bar ──────────────────────────────────────────────────── */
+.timerBar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0;
+}
+
+.timerFill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B6B, #FFD93D);
+  transition: width 1s linear;
+}
+
+.timerText {
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 6px 0 0;
+  padding: 0 24px;
+}
+
+/* ── Details ────────────────────────────────────────────────────── */
+.alertDetails {
+  padding: 16px 24px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.detailLabel {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+  min-width: 100px;
+}
+
+.detailValue {
+  text-align: right;
+  word-break: break-word;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────── */
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+  padding: 16px 24px 24px;
+  flex-wrap: wrap;
+}
+
+.btnAcknowledge {
+  flex: 1;
+  min-width: 140px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #00AA66, #00CC77);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 15px rgba(0, 170, 102, 0.4);
+}
+
+.btnAcknowledge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 170, 102, 0.55);
+}
+
+.btnAcknowledge:active {
+  transform: translateY(0);
+}
+
+.btnMute {
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btnMute:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.mapBtn {
+  padding: 12px 18px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 10px;
+  color: #60a5fa;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.mapBtn:hover {
+  background: rgba(59, 130, 246, 0.28);
+}
