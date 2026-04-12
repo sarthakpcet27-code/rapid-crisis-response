@@ -43,7 +43,12 @@ export default function Dashboard() {
     const unsub = listenToIncidents(data => {
       const sorted = [...data].sort((a, b) => b.created_at - a.created_at);
       setIncidents(sorted);
-      if (!selected && sorted.length > 0) setSelected(sorted[0]);
+      
+      // FIX 1: Use functional state update to avoid missing dependency warning
+      setSelected(prevSelected => {
+        if (!prevSelected && sorted.length > 0) return sorted[0];
+        return prevSelected;
+      });
     });
     return () => typeof unsub === 'function' && unsub();
   }, []);
@@ -59,7 +64,7 @@ export default function Dashboard() {
       }
     });
     return () => typeof unsub === 'function' && unsub();
-  }, [selected?.id]);
+  }, [selected]); // FIX 2: Changed from selected?.id to selected to satisfy linter
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
